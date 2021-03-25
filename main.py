@@ -16,7 +16,7 @@ def homepage():
 
 @app.route("/about")
 def about():
-    return '<h1>this is our about page </h1>'
+    return render_template('about.html')
 
 
 @app.route("/multi-html")

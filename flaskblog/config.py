@@ -1,14 +1,20 @@
 
 import secrets
 
+
 class Config:
 
-    SECRET_KEY = secrets.token_hex(18) 
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///mysite.db' 
+    SECRET_KEY = secrets.token_hex(18)
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///mysite.db'
     #SQLALCHEMY_DATABASE_URI = 'mysql://admin:password1234@localhost/theflaskblog'
+
+    # Always remember to run the console run these commands to after manyally creating the database
+    # from flaskblog import db
+    # db.create_all()    - to restore the tables..
+
     SQLALCHEMY_DATABASE_URI = 'mysql://admin:password1234@localhost/theflaskblog'
 
-    #CONFIGURE MAIL.. 
+    # CONFIGURE MAIL..
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 587
     MAIL_USE_TLS = True

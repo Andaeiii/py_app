@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<h1 class="mb-3"> Posts by {{user.username}} ({{posts.total}}) </h1>
+
+    {% for post in posts.items%}
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <div class="row"> 
+              <div class="col-sm-6">
+                    <h6 class="m-0 font-weight-bold text-primary">                      
+                      <img class="img-profile rounded-circle" height="32" width="32" src="{{url_for('static', filename='uploads/'+post.author.image_file)}}"> &nbsp;
+                      <a href="{{url_for('posts.post', post_id=post.id)}}">{{post.title}}</a>
+                    </h6>
+              </div>
+              <div class="col-sm-5">
+                <a class="mr-2 text-muted" href="{{ url_for('users.user_posts', username=post.author.username) }}">{{ post.author.username }}</a>
+                <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d, %h:%m') }}</small>
+              </div>
+          </div>
+        </div>
+        <div class="card-body"> {{post.content}} </div>
+        <small class="text-muted" style="font-size:9px;display:block;color:#e6e6e6 !important;padding:4px 10px;">
+            {{post.key}}
+        </small>
+    </div>
+
+
+    {% endfor%}
+
+
+   
+    {%  for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2)  %}
+
+      {% if page_num %}
+        {% if posts.page == page_num %}
+          <a class="btn btn-info mb-4" href="{{ url_for('users.user_posts', username=user.username, page=page_num)}}"> {{page_num}}</a>
+        {% else %}
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('users.user_posts', username=user.username, page=page_num)}}"> {{page_num}}</a>
+        {% endif %}  
+      {% else %}
+        .....
+      {% endif %}
+
+
+    {%  endfor %}
+
+
+{% endblock %}
